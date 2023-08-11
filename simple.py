@@ -56,31 +56,9 @@ def original_model():
     model.add(tf.keras.layers.Dense(1))
 
     model.compile(optimizer=tf.keras.optimizers.Adam(), loss='mse')
+    return model
 
-
-model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.LSTM(128, activation='relu', input_shape=(SEQ_LEN, 1), return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(128, activation='relu', return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(128, activation='relu', return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(128, activation='relu', return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(128, activation='relu', return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(64, activation='relu', return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(64, activation='relu', return_sequences=True))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.LSTM(64, activation='relu', return_sequences=False))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.Dense(25))
-model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.Dense(1))
-    
-model.compile(optimizer=tf.keras.optimizers.Adam(), loss='mse')
-
+model = original_model()    
 model.fit(X, y, epochs=50, batch_size=32)
 
 # Save the model
